@@ -8,7 +8,7 @@ but url,username, password and port you have set in web\src\main\resources appli
 Web Module is main Module
 
 
-After that: 
+After that:- 
 
 Please execute run.bat (Windows)
 
