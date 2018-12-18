@@ -1,0 +1,3 @@
+com\az\repositories\ForecastRepository.class
+com\az\repositories\PlaceRepository.class
+com\az\repositories\ForecastDetailRepository.class
