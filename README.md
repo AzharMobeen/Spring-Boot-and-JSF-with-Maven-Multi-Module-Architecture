@@ -1,4 +1,4 @@
-# Hi,
+# Spring Boot and JSF with Maven Multi Module Architecture
 
 This project is combination of Spring Boot and JSF with maven multi module architecture
 
