@@ -1,4 +1,4 @@
-Hi,
+# Hi,
 
 This project is combination of Spring Boot and JSF with maven multi module architecture
 
@@ -13,9 +13,9 @@ After that:
 Please execute run.bat (Windows)
 
 Or simply execute bellow commands:
-1) From inside project (1ot-assignment/)
+1) From inside project
 	mvn clean install
-2) Then move to web folder (1ot-assignment/web/)
+2) Then move to web folder
 	mvn spring-boot:run
 
 3) Now open browser and hit this url: 
@@ -26,3 +26,4 @@ I hope, Soon I will get feedback.
 
 Thanks,
 Azhar Mobeen
+AzharMobeen@gmail.com
