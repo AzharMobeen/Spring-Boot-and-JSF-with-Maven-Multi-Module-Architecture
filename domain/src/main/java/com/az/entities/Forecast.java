@@ -40,11 +40,5 @@ public class Forecast {
 		this.forecastDetailList.add(forecastDetail);
 		forecastDetail.setForecast(this);
 		return forecastDetail;
-	}
-
-	public ForecastDetail removeForecastDetail(ForecastDetail forecastDetail) {
-		this.forecastDetailList.remove(forecastDetail);
-		forecastDetail.setForecast(null);
-		return forecastDetail;
-	}
+	}	
 }

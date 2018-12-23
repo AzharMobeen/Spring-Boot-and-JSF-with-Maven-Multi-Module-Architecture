@@ -27,6 +27,6 @@ public class Place {
 
 	@ManyToOne
 	@JoinColumn(name = "forecastDetail_id")
-	private ForecastDetail forecastDetail;
+	private ForecastDetail forecastDetail;		
 
 }

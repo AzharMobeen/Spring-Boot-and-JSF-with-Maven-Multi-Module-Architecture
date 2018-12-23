@@ -1,5 +1,13 @@
 package com.az.business;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
+
 import com.az.entities.Forecast;
 import com.az.entities.ForecastDetail;
 import com.az.entities.Place;
@@ -7,12 +15,6 @@ import com.az.entities.Weather;
 import com.az.repositories.ForecastDetailRepository;
 import com.az.repositories.ForecastRepository;
 import com.az.repositories.PlaceRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 @Transactional
@@ -28,81 +30,22 @@ public class WeatherForecastService {
     private ForecastDetailRepository forecastDetailRepository;
 
     public List<Forecast> saveRestApiResponse(Weather weather){
-        List<Forecast> temp = new ArrayList<>();
-        if(weather.getForecastList()!=null && !weather.getForecastList().isEmpty()){
-
+        List<Forecast> temp = null;
+        if(CollectionUtils.isEmpty(weather.getForecastList())){
             weather.getForecastList().forEach(forecast -> {
-                forecast.setForecastDetailList(new ArrayList<>());
-                if(forecast.getDay()!=null) {
-                    //forecast.getDay().setForecast(forecast);
-                    forecast.getDay().setDayOrNight("Day");
-                    if(forecast.getDay().getPlaceList()!=null && !forecast.getDay().getPlaceList().isEmpty()) {
-                        forecast.getDay().getPlaceList().forEach(place -> {
-                            place.setForecastDetail(forecast.getDay());
-
-                        });
-                    }
-
-                    if(forecast.getDay().getWindList()!=null && !forecast.getDay().getWindList().isEmpty()) {
-                        forecast.getDay().getWindList().forEach(wind -> {
-                            wind.setForecastDetail(forecast.getDay());
-
-                        });
-                    }
-                    forecast.addForecastDetail(forecast.getDay());
-                }
-                if(forecast.getNight()!=null){
-                    //forecast.getNight().setForecast(forecast);
-                    forecast.getNight().setDayOrNight("Night");
-
-                    if(forecast.getNight().getPlaceList()!=null && !forecast.getNight().getPlaceList().isEmpty()) {
-                        forecast.getNight().getPlaceList().forEach(place -> {
-                            place.setForecastDetail(forecast.getNight());
-
-                        });
-                    }
-
-                    if(forecast.getNight().getWindList()!=null && !forecast.getNight().getWindList().isEmpty()) {
-                        forecast.getNight().getWindList().forEach(wind -> {
-                            wind.setForecastDetail(forecast.getNight());
-
-                        });
-                    }
-                    forecast.addForecastDetail(forecast.getNight());
-                }
-
+                forecast.setForecastDetailList(new ArrayList<>());                                
+                setForecastDetailForDay(forecast);                                
+                setForecastDetailForNight(forecast);                	
             });
-
             temp = forecastRepository.saveAll(weather.getForecastList());
-
         }
-
         return temp;
     }
-
-    public List<Forecast> getAllForecastList(){
-        List<Forecast> forecastList = forecastRepository.findAll();
-        if(!forecastList.isEmpty())
-            forecastList = this.initializeForecastDetailList(forecastList);
-        return forecastList;
-    }
+    
 
     public List<Place> getPlaceListForSelectedForecastDetail(ForecastDetail forecastDetail){
         return placeRepository.findByForecastDetail(forecastDetail);
-    }
-
-    public List<Forecast> getForecastListByLocation(String location){
-        List<Forecast> forecastList = forecastRepository.findByForecastDetailListPlaceListNameContaining(location);
-        if(!forecastList.isEmpty())
-            forecastList = this.initializeForecastDetailList(forecastList);
-        return forecastList;
-    }
-    private List<Forecast> initializeForecastDetailList(List<Forecast> forecastList){
-        forecastList.forEach(forecast -> {
-            forecast.getForecastDetailList().size();
-        });
-        return forecastList;
-    }
+    }    
 
     public List<ForecastDetail> getForecastDetailListByLocation(String location){
         return forecastDetailRepository.findByPlaceListNameContaining(location);
@@ -110,5 +53,46 @@ public class WeatherForecastService {
 
     public List<ForecastDetail> getAllForecastDetailList(){
         return forecastDetailRepository.findAll();
+    }
+    
+    private void setForecastDetailForDay(Forecast forecast) {
+    	if(forecast.getDay()!=null) {    		
+	    	forecast.getDay().setDayOrNight("Day");	    	
+	    	ForecastDetail forecastDetail = setForecastDetailForBoth(forecast.getDay());
+	        forecast.addForecastDetail(forecastDetail);        
+    	}
+    }
+    private void setForecastDetailForNight(Forecast forecast) {
+    	if(forecast.getNight()!=null) {
+    		forecast.getNight().setDayOrNight("Night");
+    		ForecastDetail forecastDetail = setForecastDetailForBoth(forecast.getNight());
+    		forecast.addForecastDetail(forecastDetail);
+    	}
+                
+    }
+    private ForecastDetail setForecastDetailForBoth(ForecastDetail forecastDetail) {
+    		
+    	setForecastDetailPlaceList(forecastDetail);        
+		setForecastDetailWindList(forecastDetail);
+    	return forecastDetail;
+    	                
+    }       
+    
+    private void setForecastDetailPlaceList(ForecastDetail forecastDetail) {
+    	
+    	if(CollectionUtils.isEmpty(forecastDetail.getPlaceList())) {
+        	
+    		forecastDetail.getPlaceList().forEach(place -> {
+                place.setForecastDetail(forecastDetail);
+            	
+            });
+        }        
+    }
+    private void setForecastDetailWindList(ForecastDetail forecastDetail) {
+    	if(CollectionUtils.isEmpty(forecastDetail.getWindList())) {
+    		forecastDetail.getWindList().forEach(wind -> {
+                wind.setForecastDetail(forecastDetail);
+            });
+        }
     }
 }

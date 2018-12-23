@@ -1,8 +1,5 @@
-D:\1oT-Assignment\1ot-assignment\domain\src\main\java\com\az\entities\Place.java
-D:\1oT-Assignment\1ot-assignment\domain\src\main\java\com\az\entities\Night.java
-D:\1oT-Assignment\1ot-assignment\domain\src\main\java\com\az\entities\Hotel.java
-D:\1oT-Assignment\1ot-assignment\domain\src\main\java\com\az\entities\Weather.java
-D:\1oT-Assignment\1ot-assignment\domain\src\main\java\com\az\entities\Day.java
-D:\1oT-Assignment\1ot-assignment\domain\src\main\java\com\az\entities\ForecastDetail.java
-D:\1oT-Assignment\1ot-assignment\domain\src\main\java\com\az\entities\Wind.java
-D:\1oT-Assignment\1ot-assignment\domain\src\main\java\com\az\entities\Forecast.java
+D:\eclispeWorkspace\Spring-Boot-and-JSF-with-Maven-Multi-Module-Architecture\domain\src\main\java\com\az\entities\Place.java
+D:\eclispeWorkspace\Spring-Boot-and-JSF-with-Maven-Multi-Module-Architecture\domain\src\main\java\com\az\entities\ForecastDetail.java
+D:\eclispeWorkspace\Spring-Boot-and-JSF-with-Maven-Multi-Module-Architecture\domain\src\main\java\com\az\entities\Wind.java
+D:\eclispeWorkspace\Spring-Boot-and-JSF-with-Maven-Multi-Module-Architecture\domain\src\main\java\com\az\entities\Weather.java
+D:\eclispeWorkspace\Spring-Boot-and-JSF-with-Maven-Multi-Module-Architecture\domain\src\main\java\com\az\entities\Forecast.java

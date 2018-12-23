@@ -53,4 +53,11 @@ public class ForecastDetail
 
     @Column(name = "day_Night")
     private String dayOrNight;
+    
+    public Place addPlace(Place place) {
+		this.placeList.add(place);
+		place.setForecastDetail(this);
+		return place;
+	}	
+    
 }
