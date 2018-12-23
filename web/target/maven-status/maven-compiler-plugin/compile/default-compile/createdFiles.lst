@@ -1,4 +1,3 @@
 com\az\web\util\JsfUtil.class
 com\az\web\config\DemoApplication.class
 com\az\web\controller\WeatherController.class
-com\az\web\controller\datamodel\ForecastLazyDataModel.class
