@@ -1,7 +1,9 @@
 package com.az.web.config;
 
 
-import com.sun.faces.config.ConfigureListener;
+import javax.faces.webapp.FacesServlet;
+import javax.servlet.ServletContext;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -17,8 +19,7 @@ import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
-import javax.faces.webapp.FacesServlet;
-import javax.servlet.ServletContext;
+import com.sun.faces.config.ConfigureListener;
 
 @ComponentScan(basePackages = {"com.az"})
 @EntityScan(basePackages = {"com.az"})

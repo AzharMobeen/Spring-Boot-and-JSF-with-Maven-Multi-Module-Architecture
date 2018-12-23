@@ -16,6 +16,9 @@ import com.az.repositories.ForecastDetailRepository;
 import com.az.repositories.ForecastRepository;
 import com.az.repositories.PlaceRepository;
 
+import lombok.extern.java.Log;
+
+@Log
 @Service
 @Transactional
 public class WeatherForecastService {
@@ -30,6 +33,7 @@ public class WeatherForecastService {
     private ForecastDetailRepository forecastDetailRepository;
 
     public List<Forecast> saveRestApiResponse(Weather weather){
+    	log.info("saveRestApiResponse Start");
         List<Forecast> temp = null;
         if(CollectionUtils.isEmpty(weather.getForecastList())){
             weather.getForecastList().forEach(forecast -> {
@@ -39,60 +43,72 @@ public class WeatherForecastService {
             });
             temp = forecastRepository.saveAll(weather.getForecastList());
         }
+        log.info("saveRestApiResponse End");
         return temp;
     }
     
 
     public List<Place> getPlaceListForSelectedForecastDetail(ForecastDetail forecastDetail){
+    	log.info("getPlaceListForSelectedForecastDetail Start");
         return placeRepository.findByForecastDetail(forecastDetail);
     }    
 
     public List<ForecastDetail> getForecastDetailListByLocation(String location){
+    	log.info("getForecastDetailListByLocation Start");
         return forecastDetailRepository.findByPlaceListNameContaining(location);
     }
 
     public List<ForecastDetail> getAllForecastDetailList(){
+    	log.info("getAllForecastDetailList Start");
         return forecastDetailRepository.findAll();
     }
     
     private void setForecastDetailForDay(Forecast forecast) {
+    	log.info("setForecastDetailForDay Start");
     	if(forecast.getDay()!=null) {    		
 	    	forecast.getDay().setDayOrNight("Day");	    	
 	    	ForecastDetail forecastDetail = setForecastDetailForBoth(forecast.getDay());
 	        forecast.addForecastDetail(forecastDetail);        
     	}
+    	log.info("setForecastDetailForDay End");
     }
     private void setForecastDetailForNight(Forecast forecast) {
+    	log.info("setForecastDetailForNight Start");
     	if(forecast.getNight()!=null) {
     		forecast.getNight().setDayOrNight("Night");
     		ForecastDetail forecastDetail = setForecastDetailForBoth(forecast.getNight());
     		forecast.addForecastDetail(forecastDetail);
     	}
+    	log.info("setForecastDetailForNight End");
                 
     }
     private ForecastDetail setForecastDetailForBoth(ForecastDetail forecastDetail) {
-    		
+    	log.info("setForecastDetailForBoth Start");
     	setForecastDetailPlaceList(forecastDetail);        
 		setForecastDetailWindList(forecastDetail);
+		log.info("setForecastDetailForBoth End");
     	return forecastDetail;
     	                
     }       
     
     private void setForecastDetailPlaceList(ForecastDetail forecastDetail) {
-    	
+    	log.info("setForecastDetailPlaceList Start");
     	if(CollectionUtils.isEmpty(forecastDetail.getPlaceList())) {
         	
     		forecastDetail.getPlaceList().forEach(place -> {
                 place.setForecastDetail(forecastDetail);
             	
             });
-        }        
+        }
+    	log.info("setForecastDetailPlaceList End");
     }
     private void setForecastDetailWindList(ForecastDetail forecastDetail) {
+    	log.info("setForecastDetailWindList Start");
     	if(CollectionUtils.isEmpty(forecastDetail.getWindList())) {
     		forecastDetail.getWindList().forEach(wind -> {
                 wind.setForecastDetail(forecastDetail);
             });
         }
+    	log.info("setForecastDetailWindList End");
     }
 }
