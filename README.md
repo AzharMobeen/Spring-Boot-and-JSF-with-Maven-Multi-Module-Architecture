@@ -1,6 +1,6 @@
 # Spring Boot and JSF with Maven Multi Module Architecture
 
-This project is combination of Spring Boot and JSF with maven multi module architecture, In which I'm using Spring Schedular (in one module) to run scheduled task to consume Weather rest api with JAXB and save data into PostgreSQL database. In frontend module I'm fetching that data from PostgreSQL database to display and some other functionality. For Backend I'm using Spring-Data-JPA and Spring-JPA-Repositories.
+This project is combination of **Spring Boot** and **JSF** with **maven multi module** architecture, In which I'm using **Spring Schedular** (in one module) to run scheduled task to consume **Weather rest api** with **JAXB** and save data into PostgreSQL database. In frontend module I'm fetching that data from **PostgreSQL database** to display and some other functionality. For Backend I'm using Spring-Data-JPA and Spring-JPA-Repositories.
 
 I'm using postgreSQL (Schema will be created by it self) but url,username, password and port you have set in web\src\main\resources application.properties file
 
