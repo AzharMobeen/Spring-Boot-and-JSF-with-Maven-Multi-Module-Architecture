@@ -4,21 +4,15 @@ This project is combination of **Spring Boot** and **JSF** with **maven multi mo
 
 I'm using postgreSQL (Schema will be created by it self) but url,username, password and port you have set in web\src\main\resources application.properties file
 
-Web Module is main Module
+* Web Module is main Module.
+* Please execute run.bat (Windows).
+* Or simply execute bellow commands:
+* From inside project mvn clean install.
+* Then move to web folder mvn spring-boot:run
+* Now open browser and hit this url: 
+* http://localhost:8080/index.xhtml
 
-After that:-
 
-Please execute run.bat (Windows)
-
-Or simply execute bellow commands:
-
-From inside project mvn clean install
-
-Then move to web folder mvn spring-boot:run
-
-Now open browser and hit this url: 
-http://localhost:8080/index.xhtml
-
-Thanks, 
-Azhar Mobeen
+Thanks,  
+Azhar Mobeen  
 AzharMobeen@gmail.com
